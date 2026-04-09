@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>L4D1 Dedicated Server — Компактный мануал | Плагины + твики</title>
+    <!-- Bootstrap 5 + Icons + Google Fonts (уменьшенный вес) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; background: #eef2f5; scroll-behavior: smooth; }
+        .navbar-brand { font-weight: 700; letter-spacing: -0.3px; font-size: 1.2rem; }
+        .hero-section { background: linear-gradient(135deg, #0a2b3e 0%, #1a4c6e 100%); color: white; padding: 2rem 0 1.8rem; border-bottom: 3px solid #ff914d; }
+        .code-block { background: #1e2a36; color: #e9f1e9; border-radius: 0.9rem; padding: 0.9rem; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.8rem; overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+        .step-icon { font-size: 1.8rem; background: #eef2ff; width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50px; color: #1a4c6e; }
+        .badge-port { background-color: #ff914d; color: #1e2a36; font-weight: 600; }
+        .toc-list a { text-decoration: none; font-weight: 500; font-size: 0.9rem; }
+        .toc-list a:hover { color: #ff914d !important; }
+        .warning-callout { border-left: 4px solid #ff914d; background: #fff6e8; }
+        .accordion-button:not(.collapsed) { background-color: #eef2ff; color: #1a4c6e; }
+        .accordion-button { font-size: 0.9rem; padding: 0.7rem 1rem; }
+        .card { border-radius: 1rem; transition: all 0.1s ease; }
+        .table-params { font-size: 0.8rem; }
+        .sticky-top { top: 70px; }
+        @media (max-width: 768px) { .hero-section { padding: 1.2rem 0; } .step-icon { width: 40px; height: 40px; font-size: 1.4rem; } }
+    </style>
+</head>
+<body>
+
+<!-- Navigation compact -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm py-2">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="bi bi-shield-shaded me-1"></i>L4D1·Server</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto flex-wrap">
+                <li class="nav-item"><a class="nav-link" href="#steamcmd">SteamCMD</a></li>
+                <li class="nav-item"><a class="nav-link" href="#servercfg">server.cfg</a></li>
+                <li class="nav-item"><a class="nav-link" href="#autoexec">autoexec</a></li>
+                <li class="nav-item"><a class="nav-link" href="#metamod">Meta+SM</a></li>
+                <li class="nav-item"><a class="nav-link" href="#advanced">Твики</a></li>
+                <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero compact -->
+<section class="hero-section text-center">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <i class="bi bi-server display-6 mb-2"></i>
+                <h1 class="h3 fw-bold">Выделенный сервер Left 4 Dead <span class="text-warning">(L4D1)</span></h1>
+                <p class="mb-2">Установка • autoexec.cfg • плагины • цвета контуров • проброс • продвинутые моды</p>
+                <div><span class="badge bg-light text-dark me-2"><i class="bi bi-hdd-stack"></i> ~8 ГБ</span><span class="badge bg-light text-dark me-2"><i class="bi bi-windows"></i> Win 10/11/Server</span><span class="badge bg-light text-dark"><i class="bi bi-people"></i> до 32 слотов</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container my-4">
+    <div class="row g-4">
+        <!-- Боковое меню компакт -->
+        <div class="col-lg-3">
+            <div class="sticky-top" style="top: 70px;">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white fw-bold py-2"><i class="bi bi-list-ul me-2"></i>Навигация</div>
+                    <div class="card-body p-2">
+                        <ul class="list-unstyled toc-list ms-1 mb-0">
+                            <li class="mb-2"><a href="#steamcmd" class="text-dark"><i class="bi bi-box-seam me-2"></i>SteamCMD + обновления</a></li>
+                            <li class="mb-2"><a href="#firstrun" class="text-dark"><i class="bi bi-play-circle me-2"></i>Первый запуск</a></li>
+                            <li class="mb-2"><a href="#servercfg" class="text-dark"><i class="bi bi-filetype-cfg me-2"></i>server.cfg (ядро)</a></li>
+                            <li class="mb-2"><a href="#autoexec" class="text-dark"><i class="bi bi-file-earmark-code me-2"></i>autoexec.cfg + контуры</a></li>
+                            <li class="mb-2"><a href="#metamod" class="text-dark"><i class="bi bi-puzzle me-2"></i>Metamod+SourceMod</a></li>
+                            <li class="mb-2"><a href="#ports" class="text-dark"><i class="bi bi-router me-2"></i>Порты + скрытие</a></li>
+                            <li class="mb-2"><a href="#advanced" class="text-dark"><i class="bi bi-gear-wide-connected me-2"></i>Продвинутое (8+ игроков, 100тик)</a></li>
+                            <li class="mb-2"><a href="#plugins" class="text-dark"><i class="bi bi-puzzle-fill me-2"></i>ТОП плагины</a></li>
+                            <li class="mb-2"><a href="#monitoring" class="text-dark"><i class="bi bi-bar-chart-steps me-2"></i>Мониторинг + HLSW</a></li>
+                            <li class="mb-2"><a href="#faq" class="text-dark"><i class="bi bi-question-circle-fill me-2"></i>Ошибки и фиксы</a></li>
+                            <li class="mb-2"><a href="#startup" class="text-dark"><i class="bi bi-rocket-takeoff me-2"></i>Запуск / тест</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент компактнее на 25% -->
+        <div class="col-lg-9">
+            <!-- STEAMCMD -->
+            <section id="steamcmd" class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="step-icon"><i class="bi bi-terminal-fill"></i></div>
+                    <h2 class="h5 fw-semibold mb-0">⚙️ SteamCMD — установка сервера</h2>
+                </div>
+                <div class="card shadow-sm border-0 p-3">
+                    <p>Создайте папку <code>C:\L4D_Server</code>. Скачайте <strong>steamcmd.zip</strong> с valve. Внутри выполните:</p>
+                    <div class="code-block mb-2">
+                        login anonymous<br>
+                        force_install_dir C:\L4D_Server<br>
+                        app_update 222840 validate<br>
+                        quit
+                    </div>
+                    <p class="mb-0 small"><i class="bi bi-file-batch"></i> <strong>update.bat</strong> для быстрого обновления:</p>
+                    <div class="code-block mt-1">steamcmd +login anonymous +force_install_dir . +app_update 222840 validate +quit</div>
+                    <div class="alert alert-info mt-2 py-1 small mb-0">✅ AppID 222840 = L4D1 dedicated server. Размер ~8 ГБ, время загрузки ~5-20 мин.</div>
+                </div>
+            </section>
+
+            <!-- Первый запуск -->
+            <section id="firstrun" class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="step-icon"><i class="bi bi-play-btn-fill"></i></div>
+                    <h2 class="h5 fw-semibold mb-0">🖥️ Первый запуск (srcds.exe)</h2>
+                </div>
+                <div class="card shadow-sm border-0 p-3">
+                    <p>Создайте <code>start_server.bat</code> в <code>C:\L4D_Server</code>:</p>
+                    <div class="code-block">@echo off<br>cd /d C:\L4D_Server<br>srcds.exe -console -game left4dead -port 27015 +map l4d_hospital01_apartment +sv_lan 0 -secure</div>
+                    <div class="row mt-2 g-2">
+                        <div class="col-6"><span class="badge bg-secondary">-tickrate 100</span> высокий тикрейт (с плагином)</div>
+                        <div class="col-6"><span class="badge bg-secondary">-maxplayers 12</span> больше слотов</div>
+                        <div class="col-6"><span class="badge bg-secondary">-nomaster</span> скрыть из списка</div>
+                        <div class="col-6"><span class="badge bg-secondary">-ip 192.168.x.x</span> привязка IP</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- server.cfg (основное) -->
+            <section id="servercfg" class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="step-icon"><i class="bi bi-filetype-cfg"></i></div>
+                    <h2 class="h5 fw-semibold mb-0">🛠️ server.cfg — ядро сервера</h2>
+                </div>
+                <div class="card shadow-sm border-0 p-3">
+                    <p>Путь: <code>left4dead\cfg\server.cfg</code>. Минимальная рабочая конфигурация:</p>
+                    <div class="code-block">
+hostname "Мой L4D1 Server"<br>
+rcon_password "securepass2025"<br>
+sv_password ""<br>
+sv_lan 0<br>
+sv_region 4<br>
+sv_maxrate 25000<br>
+sv_minrate 10000<br>
+sv_maxupdaterate 30<br>
+z_difficulty Normal<br>
+maxplayers 8<br>
+mp_afk_time 45<br>
+sv_allow_lobby_connect_only 0<br>
+exec banned_user.cfg
+                    </div>
+                    <p class="small mt-2 mb-0"><i class="bi bi-key"></i> <strong>RCON:</strong> удаленное управление через <code>rcon_password</code>. Не забудьте сменить пароль!</p>
+                </div>
+            </section>
+
+            <!-- autoexec.cfg + цвета контуров (клиентский твик) -->
+            <section id="autoexec" class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="step-icon"><i class="bi bi-file-earmark-code"></i></div>
+                    <h2 class="h5 fw-semibold mb-0">🎨 autoexec.cfg + контуры (GLOW)</h2>
+                </div>
+                <div class="card shadow-sm border-0 p-3">
+                    <p>Файл для клиента <code>Steam/left4dead/left4dead/cfg/autoexec.cfg</code>. Улучшает интерполяцию, прицел и цвета:</p>
+                    <div class="code-block small">
+rate "30000"<br>
+cl_cmdrate "30" | cl_updaterate "30"<br>
+cl_interp "0.067" | cl_interp_ratio "2"<br>
+// ===== ЦВЕТА КОНТУРОВ (лучшая видимость) =====<br>
+cl_glow_infected_r "0.0"<br>
+cl_glow_infected_g "0.5"<br>
+cl_glow_infected_b "1.0"   // синие зараженные<br>
+cl_glow_item_r "0.60"<br>
+cl_glow_item_g "0.46"<br>
+cl_glow_item_b "1.00"      // фиолетовые предметы<br>
+cl_glow_survivor_vomit_r "0.9"<br>
+cl_glow_survivor_vomit_g "0.0"<br>
+cl_glow_survivor_vomit_b "0.8"<br>
+bind "F9" "thirdpersonshoulder"
+                    </div>
+                    <div class="alert alert-warning py-1 small mt-2 mb-0">🎯 Совет: <code>cl_crosshair_dynamic 0</code> и настройка толщины прицела.</div>
+                </div>
+            </section>
+
+            <!-- Metamod + SourceMod -->
+            <section id="metamod" class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="step-icon"><i class="bi bi-puzzle-fill"></i></div>
+                    <h2 class="h5 fw-semibold mb-0">🧩 Metamod:Source + SourceMod</h2>
+                </div>
+                <div class="card shadow-sm border-0 p-3">
+                    <ol class="mb-2 small">
+                        <li>Скачайте <strong>Metamod:Source</strong> (Windows) и <strong>SourceMod</strong> (Windows).</li>
+                        <li>Распакуйте Metamod в <code>left4dead</code> → папка <code>addons</code>.</li>
+                        <li>Сгенерируйте <strong>metamod.vdf</strong> для Left 4 Dead на <a href="https://metamodsource.net/vdf.php" target="_blank">metamodsource.net/vdf.php</a> и замените.</li>
+                        <li>Распакуйте SourceMod в <code>left4dead</code> (перезапись).</li>
+                        <li>Права админа: узнать SteamID через <code>status</code>, добавить в <code>addons/sourcemod/configs/admins_simple.ini</code>:<br> <code>"STEAM_1:1:12345678" "99:z"</code></li>
+                    </ol>
+                    <div class="small bg-light p-2 rounded">📌 Проверка: в консоли сервера напишите <code>meta list</code> — должен показать SourceMod.</div>
+                </div>
+            </section>
+
+            <!-- Порты + скрытие -->
+            <section id="ports" class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="step-icon"><i class="bi bi-wifi"></i></div>
+                    <h2 class="h5 fw-semibold mb-0">🌐 Проброс портов и приватный режим</h2>
+                </div>
+                <div class="card shadow-sm border-0 p-3">
+                    <div class="row g-2">
+                        <div class="col-md-6"><strong><i class="bi bi-shield-lock"></i> Брандмауэр:</strong> UDP 27015,27016,27017</div>
+                        <div class="col-md-6"><strong><i class="bi bi-router"></i> Роутер:</strong> Forward UDP 27015 → IP ПК</div>
+                    </div>
+                    <div class="warning-callout p-2 rounded-2 mt-2 small">
+                        <i class="bi bi-eye-slash-fill"></i> <strong>Приватный сервер (по IP):</strong> в <code>start_server.bat</code> добавьте <code>-nomaster</code>, в <code>server.cfg</code> → <code>sv_tags "hidden"</code> и <code>sv_allow_lobby_connect_only 1</code>.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Продвинутая настройка (L4DToolZ, tickrate, карты) -->
+            <section id="advanced" class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="step-icon"><i class="bi bi-gear-wide-connected"></i></div>
+                    <h2 class="h5 fw-semibold mb-0">⚡ Продвинутые моды (32 слота, 100 тикрейт)</h2>
+                </div>
+                <div class="card shadow-sm border-0 p-3">
+                    <div class="accordion" id="advAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header"><button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#adv1"><i class="bi bi-people-fill me-2"></i> L4DToolZ — больше 4 игроков</button></h2>
+                            <div id="adv1" class="accordion-collapse collapse" data-bs-parent="#advAccordion"><div class="accordion-body small">Скачайте L4DToolZ (l4d1 версию), распакуйте в <code>addons</code>. В <code>start_server.bat</code> укажите <code>-maxplayers 14</code>, в <code>server.cfg</code>: <code>sm_cvar sv_maxplayers 14</code> и <code>sm_cvar survivor_limit 14</code>.</div></div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header"><button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#adv2"><i class="bi bi-speedometer2 me-2"></i> Tickrate Enabler (100 тиков)</button></h2>
+                            <div id="adv2" class="accordion-collapse collapse" data-bs-parent="#advAccordion"><div class="accordion-body small">Установите плагин Tickrate_Enabler, в параметры запуска добавьте <code>-tickrate 100</code>, в server.cfg: <code>sv_maxupdaterate 100; sv_maxcmdrate 100</code>.</div></div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header"><button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#adv3"><i class="bi bi-map-fill me-2"></i> Кастомные карты .vpk</button></h2>
+                            <div id="adv3" class="accordion-collapse collapse" data-bs-parent="#advAccordion"><div class="accordion-body small">Карты с L4DMaps кладём в <code>left4dead/addons</code>. В server.cfg: <code>sv_allowdownload 1; sv_allowupload 1; net_maxfilesize 100</code>. Смена карты: <code>changelevel название_карты</code>.</div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ТОП плагины (краткий список) -->
+            <section id="plugins" class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="step-icon"><i class="bi bi-puzzle-fill"></i></div>
+                    <h2 class="h5 fw-semibold mb-0">🔌 ТОП-5 плагинов для L4D1</h2>
+                </div>
+                <div class="row g-2">
+                    <div class="col-6 col-md-3"><div class="card border-0 shadow-sm p-2 small"><i class="bi bi-arrow-repeat text-primary"></i> <strong>Character Select</strong><br>!louis / !zoey</div></div>
+                    <div class="col-6 col-md-3"><div class="card border-0 shadow-sm p-2 small"><i class="bi bi-chat-dots-fill text-primary"></i> <strong>Admin Menu</strong><br>расширенное меню</div></div>
+                    <div class="col-6 col-md-3"><div class="card border-0 shadow-sm p-2 small"><i class="bi bi-symmetry-vertical"></i> <strong>L4D2 Weapons</strong><br>оружие из L4D2</div></div>
+                    <div class="col-6 col-md-3"><div class="card border-0 shadow-sm p-2 small"><i class="bi bi-cup-straw"></i> <strong>Store / Points</strong><br>очки + магазин</div></div>
+                </div>
+                <div class="alert alert-secondary mt-2 py-1 small mb-0">📥 Установка: файлы <code>.smx</code> → <code>addons/sourcemod/plugins</code> → <code>sm plugins refresh</code></div>
+            </section>
+
+            <!-- Мониторинг + HLSW + бэкапы (НОВАЯ ИНФОРМАЦИЯ) -->
+            <section id="monitoring" class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="step-icon"><i class="bi bi-bar-chart-steps"></i></div>
+                    <h2 class="h5 fw-semibold mb-0">📊 Мониторинг, HLSW, бэкапы и авторестарт</h2>
+                </div>
+                <div class="card shadow-sm border-0 p-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-1"><i class="bi bi-hdd-network"></i> <strong>HLSW</strong> — утилита для мониторинга сервера (RCON, статус).</p>
+                            <p class="mb-1"><i class="bi bi-arrow-repeat"></i> <strong>Авторестарт при краше:</strong> используйте скрипт watchdog или <code>FireDaemon</code>.</p>
+                            <div class="code-block small mt-1">
+:loop<br>
+srcds.exe -console -game left4dead -port 27015 +map l4d_hospital01_apartment<br>
+timeout /t 10<br>
+goto loop
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p><i class="bi bi-database"></i> <strong>Бэкап конфигов и плагинов</strong><br>Создайте архив <code>left4dead/cfg</code> и <code>addons/sourcemod/configs</code> раз в неделю.</p>
+                            <p><i class="bi bi-graph-up"></i> <strong>SourceBans++</strong> — веб-панель для управления банами и админами.</p>
+                            <p><i class="bi bi-cpu"></i> <strong>Производительность:</strong> используйте <code>sm_cvar fps_max 0</code> и приоритет процесса "Высокий".</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ошибки и фиксы (расширенный FAQ) -->
+            <section id="faq" class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="step-icon"><i class="bi bi-question-circle-fill"></i></div>
+                    <h2 class="h5 fw-semibold mb-0">❓ Частые проблемы + новые решения</h2>
+                </div>
+                <div class="card shadow-sm border-0 p-3">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed py-1" type="button" data-bs-toggle="collapse" data-bs-target="#f1">🔁 Can't allocate any server IP port</button></h2><div id="f1" class="accordion-collapse collapse"><div class="accordion-body small">Порт занят. Поменяйте в bat: <code>-port 27016</code> и откройте UDP в брандмауэре.</div></div></div>
+                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed py-1" type="button" data-bs-toggle="collapse" data-bs-target="#f2">⚠️ SourceMod не инициализируется</button></h2><div id="f2" class="accordion-collapse collapse"><div class="accordion-body small">Обновите Metamod.vdf через генератор сайта metamodsource.net. Проверьте <code>addons/metamod/bin</code>.</div></div></div>
+                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed py-1" type="button" data-bs-toggle="collapse" data-bs-target="#f3">🌍 Сервер не виден в интернете</button></h2><div id="f3" class="accordion-collapse collapse"><div class="accordion-body small">Проверьте проброс порта, <code>sv_lan 0</code>, брандмауэр для srcds.exe. Для теста используйте <code>heartbeat</code> в консоли.</div></div></div>
+                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed py-1" type="button" data-bs-toggle="collapse" data-bs-target="#f4">🔑 Steam validation rejected</button></h2><div id="f4" class="accordion-collapse collapse"><div class="accordion-body small">Убедитесь что параметр <code>-secure</code> в bat и <code>secure 1</code> в server.cfg. Временное решение: <code>-insecure</code> для локальных тестов.</div></div></div>
+                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed py-1" type="button" data-bs-toggle="collapse" data-bs-target="#f5">🧩 Your map differs from the server's</button></h2><div id="f5" class="accordion-collapse collapse"><div class="accordion-body small">Удалите старые версии карт .vpk из <code>addons</code> у клиента и сервера, синхронизируйте файлы.</div></div></div>
+                        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed py-1" type="button" data-bs-toggle="collapse" data-bs-target="#f6">🐌 Лаги при 8+ игроках</button></h2><div id="f6" class="accordion-collapse collapse"><div class="accordion-body small">Включите Tickrate Enabler, увеличьте <code>sv_maxupdaterate 66</code>, установите L4DToolZ с оптимизациями, выключите лишние плагины.</div></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Запуск и тест -->
+            <section id="startup" class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="step-icon"><i class="bi bi-rocket-takeoff"></i></div>
+                    <h2 class="h5 fw-semibold mb-0">🚀 Запуск и подключение</h2>
+                </div>
+                <div class="card shadow-sm border-0 p-3">
+                    <ol class="small mb-2">
+                        <li>Запустите <code>start_server.bat</code>. Дождитесь строки "Connection to Steam servers successful".</li>
+                        <li>В клиенте L4D1 откройте консоль <code>`</code> и введите <code>connect 127.0.0.1</code> (локально) или ваш внешний IP.</li>
+                    </ol>
+                    <div class="code-block small">] connect 192.168.1.10:27015<br>Connecting to 192.168.1.10:27015...</div>
+                    <div class="alert alert-success mt-2 py-1 small mb-0"><i class="bi bi-check-circle-fill"></i> Готово! Для друзей используйте <code>whatsmyip</code> и раздайте IP:порт.</div>
+                </div>
+            </section>
+
+            <!-- Дополнительные советы -->
+            <div class="alert alert-secondary border-0 shadow-sm small">
+                <i class="bi bi-lightbulb-fill"></i> <strong>Совет PRO:</strong> для защиты от флуда RCON добавьте в <code>server.cfg</code> → <code>sv_rcon_banpenalty 10</code> и <code>sv_rcon_maxfailures 5</code>. Также можно использовать <strong>L4D1 Community Fixes</strong> плагин для исправления вылетов.
+            </div>
+            <div class="text-center py-2 small">
+                <i class="bi bi-heart-fill text-danger"></i> L4D1 Dedicated Server — полный мануал. Valve, Left 4 Dead — зарегистрированные товарные знаки.
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white-50 py-3 mt-2 small">
+    <div class="container text-center">
+        <span>© 2025 L4D1 Server Manual — неофициальное руководство. Актуальные ссылки: <a href="https://developer.valvesoftware.com/wiki/SteamCMD" class="text-white-50" target="_blank">SteamCMD</a> | <a href="https://www.sourcemod.net/" class="text-white-50" target="_blank">SourceMod</a></span>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
